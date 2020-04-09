@@ -14,11 +14,21 @@ buildscript {
     }
 }
 
+plugins {
+    id "org.sonarqube" version "2.8"
+}
+
 allprojects {
 
     repositories {
         google()
         jcenter()
+    }
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "ARX-Vestibulum_pea-frontend"
     }
 }
 
