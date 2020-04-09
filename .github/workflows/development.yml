@@ -1,27 +1,34 @@
 name: Development
 on:
-  push:
-    branches:
-      - development
-      - feature/dev-*
+  pull_request:
+    branches: 
+      - 'development'
+      - 'feature/dev-*'
+
 
 jobs:
-  build:
+  verifying:
     name: Verifying
     runs-on: ubuntu-latest
     steps:
       - working-directory: code
+      
       - name: Checkout
         uses: actions/checkout@v2
+      
       - name: Set Up
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      
       - name: Assemble
         run: ./gradlew assembleDebug
+      
       - name: Lint
         run: ./gradlew lintDebug
+      
       - name: Test
         run: ./gradlew testDebug
+      
       - name: Static Analysis
         run: ./gradlew Sonarqube
