@@ -1,3 +1,7 @@
+name: Development
+defaults:
+  run:
+    working-directory: code
 on:
   pull_request:
     branches: 
@@ -10,10 +14,7 @@ jobs:
     name: Verifying
     runs-on: ubuntu-latest
     steps:
-      - working-directory: code
-      
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       
       - name: Set Up
         uses: actions/setup-java@v1
