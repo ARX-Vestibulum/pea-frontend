@@ -16,12 +16,14 @@ android:
   licenses:
   - android-sdk-license-.+
 
+before_script: cd code
+
 script:
-  - code/gradlew clean
-  - code/gradlew assemble
-  - code/gradlew lint
-  - code/gradlew test
-  - code/gradlew sonarqube
+  - ./gradlew clean
+  - ./gradlew assembleDebug
+  - ./gradlew lintDebug
+  - ./gradlew testDebug
+  - ./gradlew sonarqubeDebug
 
 addons:
   sonarcloud:
