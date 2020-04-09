@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VARIANT_COMMAND_SUFFIX: Debug
+    continue-on-error: false
     steps:
       - uses: actions/checkout@v2
       
