@@ -14,10 +14,12 @@ env:
   VARIANT_COMMAND_SUFFIX: Acceptance
   VARIANT_NAME: acceptance
 
+
 jobs:
   verifying:
     name: Verifying
     runs-on: ubuntu-latest
+    continue-on-error: false
     steps:
       - uses: actions/checkout@v2
       
@@ -36,7 +38,9 @@ jobs:
         run: ./gradlew test$VARIANT_COMMAND_SUFFIX
       
       - name: Static Analysis
-        run: ./gradlew sonarqube
+        run: ./gradlew sonarqube -DsystemProp.sonar.login=$SONARCLOUD_TOKEN
+        env:
+          SONARCLOUD_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
   
   deploying:
     name: Deploying
@@ -45,6 +49,7 @@ jobs:
     env:
       DEPLOY_DIR_PATH: deployDir
       APP_NAME: pea-$GITHUB_WORKFLOW-$GITHUB_RUN_NUMBER.apk
+    continue-on-error: false
     steps:
       - uses: actions/checkout@v2
       
