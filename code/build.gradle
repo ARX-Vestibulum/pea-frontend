@@ -36,7 +36,7 @@ allprojects {
 
 sonarqube {
     properties {
-        property "sonar.host", "https://sonarcloud.io/"
+        property "sonar.host.url", "https://sonarcloud.io/"
         property "sonar.projectKey", "ARX-Vestibulum_pea-frontend"
         property "sonar.projectName", "PEA Frontend"
         property "sonar.version", VERSION_NAME
