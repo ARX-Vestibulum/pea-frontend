@@ -38,7 +38,9 @@ jobs:
         run: ./gradlew test$VARIANT_COMMAND_SUFFIX
       
       - name: Static Analysis
-        run: ./gradlew sonarqube
+        run: ./gradlew sonarqube -DsystemProp.sonar.login=$SONARCLOUD_TOKEN
+        env:
+          SONARCLOUD_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
   
   deploying:
     name: Deploying
