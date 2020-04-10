@@ -1,7 +1,9 @@
 name: Production
+
 defaults:
   run:
     working-directory: code
+    
 on:
   push:
     branches: 
@@ -42,7 +44,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
+          
   deploying:
     name: Deploying
     runs-on: ubuntu-latest
@@ -50,7 +52,6 @@ jobs:
     env:
       DEPLOY_DIR_PATH: deployDir
       APP_NAME: pea-$GITHUB_WORKFLOW-$GITHUB_RUN_NUMBER.apk
-      PROGUARD_EXPORT: proguard.tar.gz
     continue-on-error: false
     steps:
       - uses: actions/checkout@v2
@@ -69,8 +70,8 @@ jobs:
       - name: Moving App File
         run: mv app/build/outputs/apk/$VARIANT_NAME/app-$VARIANT_NAME.apk ../$DEPLOY_DIR_PATH/$APP_NAME
       
-      - name: Compress Pro-Guard Logs
-        run: tar -zcf ../$DEPLOY_DIR_PATH/$PROGUARD_EXPORT app/build/outputs/mapping
+      - name: Moving Pro-Guard Logs
+        run: mv app/build/outputs/mapping ../$DEPLOY_DIR_PATH
       
       - name: Archive APK
         uses: actions/upload-artifact@v1
@@ -82,5 +83,5 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: Pro-Guard Logs
-          path: ${{ env.DEPLOY_DIR_PATH }}/${{ env.PROGUARD_EXPORT }}
+          path: ${{ env.DEPLOY_DIR_PATH }}
   
