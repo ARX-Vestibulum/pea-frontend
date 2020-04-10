@@ -69,7 +69,7 @@ jobs:
         run: mv app/build/outputs/apk/$VARIANT_NAME/app-$VARIANT_NAME.apk ../$DEPLOY_DIR_PATH/$APP_NAME
       
       - name: Compress Pro-Guard Logs
-        run: tar -xcf ../$DEPLOY_DIR_PATH/proguard.tar.gz app/build/outputs/mapping
+        run: tar -zcf ../$DEPLOY_DIR_PATH/proguard.tar.gz app/build/outputs/mapping
       
       - name: Archive APK
         uses: actions/upload-artifact@v1
