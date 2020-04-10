@@ -3,11 +3,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-
     compileSdkVersion TARGET_SDK
 
     defaultConfig {
-
         applicationId "me.patrickhoette.personaleveassistant"
         minSdkVersion MIN_SDK
         targetSdkVersion TARGET_SDK
@@ -18,15 +16,13 @@ android {
     }
 
     buildTypes {
-
         debug {
-
             minifyEnabled false
             debuggable true
         }
 
         acceptance {
-
+            initWith debug
             minifyEnabled true
             shrinkResources true
             debuggable false
@@ -34,7 +30,6 @@ android {
         }
 
         release {
-
             minifyEnabled true
             shrinkResources true
             debuggable false
@@ -46,14 +41,11 @@ android {
 }
 
 dependencies {
+    implementation deps.core.kotlin_std
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation deps.core.app_compat
+    implementation deps.core.ktx
+    implementation deps.ui.constraint_layout
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

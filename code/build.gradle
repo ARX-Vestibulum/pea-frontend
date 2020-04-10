@@ -16,7 +16,6 @@ buildscript {
     }
 
     dependencies {
-
         classpath "com.android.tools.build:gradle:4.0.0-beta04"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
@@ -27,12 +26,13 @@ plugins {
 }
 
 allprojects {
-
     repositories {
         google()
         jcenter()
     }
 }
+
+subprojects { apply from: '../dependencies.gradle' }
 
 sonarqube {
     properties {
@@ -52,10 +52,12 @@ sonarqube {
 
 String getGitHash() {
     def stdout = new ByteArrayOutputStream()
+
     exec {
         commandLine 'git', 'rev-parse', '--short', 'HEAD'
         standardOutput = stdout
     }
+
     return stdout.toString().trim()
 }
 
