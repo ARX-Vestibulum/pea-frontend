@@ -50,6 +50,7 @@ jobs:
     env:
       DEPLOY_DIR_PATH: deployDir
       APP_NAME: pea-$GITHUB_WORKFLOW-$GITHUB_RUN_NUMBER.apk
+      PROGUARD_EXPORT: proguard.tar.gz
     continue-on-error: false
     steps:
       - uses: actions/checkout@v2
@@ -69,17 +70,17 @@ jobs:
         run: mv app/build/outputs/apk/$VARIANT_NAME/app-$VARIANT_NAME.apk ../$DEPLOY_DIR_PATH/$APP_NAME
       
       - name: Compress Pro-Guard Logs
-        run: tar -zcf ../$DEPLOY_DIR_PATH/proguard.tar.gz app/build/outputs/mapping
+        run: tar -zcf ../$DEPLOY_DIR_PATH/$PROGUARD_EXPORT app/build/outputs/mapping
       
       - name: Archive APK
         uses: actions/upload-artifact@v1
         with:
           name: APK
-          path: $DEPLOY_DIR_PATH/$APP_NAME
+          path: ${{ env.DEPLOY_DIR_PATH }}/${{ env.APP_NAME }}
       
       - name: Archive Pro-Guard Logs
         uses: actions/upload-artifact@v1
         with:
           name: Pro-Guard Logs
-          path: $DEPLOY_DIR_PATH/proguard.tar.fz
+          path: ${{ env.DEPLOY_DIR_PATH }}/${{ env.PROGUARD_EXPORT }}
   
