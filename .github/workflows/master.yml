@@ -41,6 +41,7 @@ jobs:
         run: ./gradlew sonarqube -DsystemProp.sonar.login=$SONARCLOUD_TOKEN
         env:
           SONARCLOUD_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
   deploying:
     name: Deploying
