@@ -54,7 +54,7 @@ jobs:
     needs: verifying
     env:
       DEPLOY_DIR_PATH: deployDir
-      APP_NAME: pea-$GITHUB_WORKFLOW-$GITHUB_RUN_NUMBER.apk
+      APP_NAME: "pea-$GITHUB_WORKFLOW-$GITHUB_RUN_NUMBER.apk"
     continue-on-error: false
     steps:
       - uses: actions/checkout@v2
@@ -86,5 +86,5 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: Pro-Guard Logs
-          path: ${{ env.DEPLOY_DIR_PATH }}
+          path: ${{ env.DEPLOY_DIR_PATH }}/mapping
   
