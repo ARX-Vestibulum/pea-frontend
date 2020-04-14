@@ -54,7 +54,7 @@ jobs:
     needs: verifying
     env:
       DEPLOY_DIR_PATH: deployDir
-      APP_NAME: pea-${{ GITHUB_WORKFLOW }}-${{ GITHUB_RUN_NUMBER }}.apk
+      APP_NAME: ${{ "pea-$GITHUB_WORKFLOW-$GITHUB_RUN_NUMBER.apk" }}
     continue-on-error: false
     steps:
       - uses: actions/checkout@v2
