@@ -54,7 +54,6 @@ jobs:
     needs: verifying
     env:
       DEPLOY_DIR_PATH: deployDir
-      APP_NAME: "pea-$GITHUB_WORKFLOW-$GITHUB_RUN_NUMBER.apk"
     continue-on-error: false
     steps:
       - uses: actions/checkout@v2
@@ -73,20 +72,20 @@ jobs:
         run: mkdir ../$DEPLOY_DIR_PATH
       
       - name: Moving App File
-        run: mv app/build/outputs/apk/$VARIANT_NAME/app-$VARIANT_NAME.apk ../$DEPLOY_DIR_PATH/$APP_NAME
+        run: mv app/build/outputs/apk/$VARIANT_NAME/app-$VARIANT_NAME.apk ../$DEPLOY_DIR_PATH/pea-$GITHUB_WORKFLOW-$GITHUB_RUN_NUMBER.apk
       
       - name: Moving Pro-Guard Logs
-        run: mv app/build/outputs/mapping ../$DEPLOY_DIR_PATH
+        run: mv app/build/outputs/mapping ../$DEPLOY_DIR_PATH/
       
       - name: Archive APK
         uses: actions/upload-artifact@v1
         with:
           name: APK
-          path: ${{ env.DEPLOY_DIR_PATH }}/${{ env.APP_NAME }}
+          path: ${{ env.DEPLOY_DIR_PATH }}/*.apk
       
       - name: Archive Pro-Guard Logs
         uses: actions/upload-artifact@v1
         with:
           name: Pro-Guard Logs
-          path: ${{ env.DEPLOY_DIR_PATH }}/mapping
+          path: ${{ env.DEPLOY_DIR_PATH }}/mapping/acceptance/*
   
