@@ -1,16 +1,47 @@
+apply from: "${project.rootDir}/versions.gradle"
+
 ext.deps = [
     core: [
-        kotlin_std: "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
-        app_compat: "androidx.appcompat:appcompat:1.1.0",
-        ktx: "androidx.core:core-ktx:1.2.0"
+        kotlin_std: [
+            group: "org.jetbrains.kotlin",
+            name: "kotlin-stdlib",
+            version: kotlin_version
+        ],
+        app_compat: [
+            group: "androidx.appcompat",
+            name: "appcompat",
+            version: versions.core.app_compat
+        ],
+        ktx: [
+            group: "androidx.core",
+            name: "core-ktx",
+            version: versions.core.ktx
+        ]
     ],
 
     ui: [
-        constraint_layout: "androidx.constraintlayout:constraintlayout:1.1.3"
+        constraint_layout: [
+            group: "androidx.constraintlayout",
+            name: "constraintlayout",
+            version: versions.ui.constraint_layout
+        ]
     ],
 
     testing: [
-        junit: "org.junit.jupiter:junit-jupiter:5.6.2",
-        kotlin_test: "org.jetbrains.kotlin:kotlin-test:kotlin-test-junit5:$kotlin_version",
+        junit: [
+            group: "org.junit.jupiter",
+            name: "junit-jupiter",
+            version: versions.testing.junit
+        ],
+        kotlin_test: [
+            group: 'org.jetbrains.kotlin',
+            name: 'kotlin-test-junit5',
+            version: kotlin_version
+        ],
+        mockk: [
+            group: "io.mockk",
+            name: "mockk",
+            version: versions.testing.mockk
+        ]
     ]
 ]

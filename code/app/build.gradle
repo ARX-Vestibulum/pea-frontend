@@ -15,6 +15,13 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    compileOptions {
+        targetCompatibility = versions.core.jvm
+        sourceCompatibility = versions.core.jvm
+    }
+
+    kotlinOptions { jvmTarget = versions.core.jvm }
+
     buildTypes {
         debug {
             minifyEnabled false
@@ -42,10 +49,12 @@ android {
 
 dependencies {
     implementation deps.core.kotlin_std
-
     implementation deps.core.app_compat
     implementation deps.core.ktx
+
     implementation deps.ui.constraint_layout
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation deps.testing.junit
+    testImplementation deps.testing.kotlin_test
+    testImplementation deps.testing.mockk
 }

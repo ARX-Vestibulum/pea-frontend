@@ -32,7 +32,7 @@ allprojects {
     }
 }
 
-subprojects { apply from: '../dependencies.gradle' }
+subprojects { apply from: "${project.rootDir}/dependencies.gradle" }
 
 sonarqube {
     properties {
