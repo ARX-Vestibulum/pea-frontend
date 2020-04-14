@@ -81,11 +81,11 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: APK
-          path: ${{ env.DEPLOY_DIR_PATH }}/*.apk
+          path: ${{ env.DEPLOY_DIR_PATH }}/pea-$GITHUB_WORKFLOW-$GITHUB_RUN_NUMBER.apk
       
       - name: Archive Pro-Guard Logs
         uses: actions/upload-artifact@v1
         with:
           name: Pro-Guard Logs
-          path: ${{ env.DEPLOY_DIR_PATH }}/mapping/acceptance/*
+          path: ${{ env.DEPLOY_DIR_PATH }}/mapping/acceptance
   
